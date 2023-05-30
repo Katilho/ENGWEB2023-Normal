@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 // https://transform.tools/json-to-mongoose
-//! ter cuidado com datas, devo só quere-las em string
 
 
 var plantaSchema = new mongoose.Schema({
@@ -58,6 +57,4 @@ var plantaSchema = new mongoose.Schema({
     }
   });
 
-//                              nome da coleção no mongoose
-//                              ->
 module.exports = mongoose.model('plantas', plantaSchema)
