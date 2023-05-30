@@ -1,13 +1,24 @@
-. Quantos registos estão na base de dados;
+#! 1.1 Setup 
+Persistência da base de dados, foi efetuada através do mongoDB, recorrendo ao seguinte comando:
+$ mongoimport -d plantas -c plantas --file plantas.json --jsonArray
+Este comando cria uma base de dados "plantas" com uma coleção "plantas", a partir do ficheiro "plantas.json"
+
+A única alteração efetuada no dataset fornecido, foi a alteração do nome do atributo "Id" para o nome "_id" que é o esperado para atributos identificadores, pelo MongoDB.
+Para esta alteração recorri à feature de substituição do vsCode através do CTRL+F, que substitui todas as ocorrências de ("Id":) para ("_id":).
+
+
+#! 1.2 Queries
+
+#* Quantos registos estão na base de dados;
 db.plantas.find().count()
 
-. Quantos registos de plantação se encontram na freguesia "São Domingos de Rana"?
+#* Quantos registos de plantação se encontram na freguesia "São Domingos de Rana"?
 db.plantas.find({"Freguesia":"São Domingos de Rana"}).count()
 
-. Qual a lista de freguesias (ordenada alfabeticamente e sem repetições)?
+#* Qual a lista de freguesias (ordenada alfabeticamente e sem repetições)?
 db.plantas.distinct("Freguesia").sort()
 
-. Qual a distribuição dos registos por freguesia (quantos registos em cada freguesia)
+#* Qual a distribuição dos registos por freguesia (quantos registos em cada freguesia)
 db.plantas.aggregate([
     {
     $group: {
@@ -17,8 +28,7 @@ db.plantas.aggregate([
   }
 ])
 
-
-. Qual a distribuição dos registos por espécie?
+#* Qual a distribuição dos registos por espécie?
 db.plantas.aggregate([
     {
     $group: {
@@ -27,3 +37,32 @@ db.plantas.aggregate([
     }
   }
 ])
+
+
+#! 1.3 API de dados
+
+Para a api de dados usei o comando, que cria a estrutura base da aplicação, sendo apenas necessário acrescentar as pastas controllers e models:
+$ npx express-generator --no-view
+Com o seguinte módulo:
+$ npm i mongoose --save
+
+Para correr a aplicação apenas, é preciso estar na diretoria "ex1" e correr o comando:
+$npm i
+que irá instalar as dependências necessárias para o programa funcionar e de seguida apenas é preciso usar o comando:
+$npm start
+que irá iniciar o serviço, estando à espera de pedidos na porta 15030
+
+
+
+#! Interface
+
+Para a interface usei o comando, que cria a estrutura base da aplicação:
+$ npx express-generator --view=pug
+Com o seguinte módulo:
+$ npm i axios --save
+
+Para correr a aplicação apenas, é preciso estar na diretoria "ex2" e correr o comando:
+$npm i
+que irá instalar as dependências necessárias para o programa funcionar e de seguida apenas é preciso usar o comando:
+$npm start
+que irá iniciar o serviço, estando à espera de pedidos na porta 15031
