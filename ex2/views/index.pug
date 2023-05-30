@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  header.w3-container.w3-indigo
+    h1 #{title}
+    //- `_id`, `Freguesia`, `Espécie`, `Estado` e `Número de intervenções`
+
+  .w3-container 
+    table.w3-table-all.w3-hoverable
+      tr 
+        th ID
+        th Freguesia
+        th Espécie
+        th Estado
+        th Número de Intervenções
+      each e in plantas
+        tr 
+          td
+            a(href="/"+e._id)= e._id
+          td= e.Freguesia
+          td
+            a(href="/especies/"+e.Espécie)= e.Espécie
+          td= e.Estado
+          td= e["Número de intervenções"]

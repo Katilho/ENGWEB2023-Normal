@@ -37,8 +37,8 @@ module.exports.list = () => {
 
 // * `GET /plantas/:id`: devolve o registo com identificador `id`;
 module.exports.getById = (id) => {
-    // return Planta.findById(id)
-    return Planta.find({_id: id})
+    return Planta.findById(id)
+    // return Planta.find({_id: id})
     .then((result) => {
         return result
     }).catch((err) => {

@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  if especies.length > 0
+    header.w3-container.w3-indigo
+      h1 #{title} [#[a(href="/") Voltar]]
+      h3 Nome científico: #{especies[0]["Nome Científico"]}
+      //- `_id`, `Freguesia`, `Espécie`, `Estado` e `Número de intervenções`
+
+    .w3-container 
+      table.w3-table-all.w3-hoverable
+        tr 
+          th ID
+          th Freguesia
+          th Espécie
+          th Estado
+          th Número de Intervenções
+        each e in especies
+          tr 
+            td
+              a(href="/"+e._id)= e._id
+            td= e.Freguesia
+            td
+              a(href="/especies/"+e.Espécie)= e.Espécie
+            td= e.Estado
+            td= e["Número de intervenções"]
+  else 
+    header.w3-container.w3-indigo
+      h1 [#[a(href="/") Voltar]]
+    p.w3-margin Não há registos relativos à #{title}!
