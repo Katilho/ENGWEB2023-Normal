@@ -17,6 +17,7 @@ db.plantas.find({"Freguesia":"São Domingos de Rana"}).count()
 
 #* Qual a lista de freguesias (ordenada alfabeticamente e sem repetições)?
 db.plantas.distinct("Freguesia").sort()
+# Comentário: Sem o sort também retornaria os elementos ordenadamente.
 
 #* Qual a distribuição dos registos por freguesia (quantos registos em cada freguesia)
 db.plantas.aggregate([
