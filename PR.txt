@@ -1,0 +1,29 @@
+. Quantos registos estão na base de dados;
+db.plantas.find().count()
+
+. Quantos registos de plantação se encontram na freguesia "São Domingos de Rana"?
+db.plantas.find({"Freguesia":"São Domingos de Rana"}).count()
+
+. Qual a lista de freguesias (ordenada alfabeticamente e sem repetições)?
+db.plantas.distinct("Freguesia").sort()
+
+. Qual a distribuição dos registos por freguesia (quantos registos em cada freguesia)
+db.plantas.aggregate([
+    {
+    $group: {
+      _id: "$Freguesia",
+      quantos: {$sum: 1}
+    }
+  }
+])
+
+
+. Qual a distribuição dos registos por espécie?
+db.plantas.aggregate([
+    {
+    $group: {
+      _id: "$Espécie",
+      quantos: {$sum: 1}
+    }
+  }
+])
